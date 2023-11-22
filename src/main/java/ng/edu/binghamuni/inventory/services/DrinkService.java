@@ -8,6 +8,6 @@ public interface DrinkService {
 Drink saveDrink(Drink drink);
 Drink getDrinkById(long id);
 List<Drink> getAllDrinks();
-Drink updateDrink(long id);
-Drink deleteDrink(long id);
+Drink updateDrink(Drink drink);
+void deleteDrink(long id);
 }

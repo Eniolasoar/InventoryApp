@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 
 public class DrinkServiceImpl implements DrinkService{
@@ -18,21 +20,49 @@ public class DrinkServiceImpl implements DrinkService{
 
     @Override
     public Drink getDrinkById(long id) {
-        return null;
+        Optional<Drink> drink =drinkRepository.findById(id);
+        Drink emptyDrink=null;
+
+        if(drink.isPresent()){
+            emptyDrink=drink.get();
+            return emptyDrink;
+        }else{
+            throw new RuntimeException("Drink not found");
+        }
+
     }
 
     @Override
     public List<Drink> getAllDrinks() {
+
         return null;
     }
 
     @Override
-    public Drink updateDrink(long id) {
-        return null;
+    public Drink updateDrink(Drink drink) {
+        Optional<Drink> optionalDrink =drinkRepository.findById(drink.getId());
+
+        if(optionalDrink.isPresent()){
+            Drink updateDrink=new Drink();
+            updateDrink.setCapacity(drink.getCapacity());
+            updateDrink.setColor(drink.getColor());
+            updateDrink.setCompany(drink.getCompany());
+            updateDrink.setName(drink.getName());
+            updateDrink.setType(drink.getType());
+            updateDrink.setId(drink.getId());
+            updateDrink.setIngredientList(drink.getIngredientList());
+
+            drinkRepository.save(updateDrink);
+            return updateDrink;
+        }else{
+            throw new RuntimeException("Drink does not exist");
+        }
+
     }
 
     @Override
-    public Drink deleteDrink(long id) {
-        return null;
+    public void deleteDrink(long id) {
+        drinkRepository.deleteById(id);
+
     }
 }
