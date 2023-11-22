@@ -8,6 +8,14 @@ import java.util.List;
 
 @Entity(name="drink")
 public class Drink {
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     public String getName() {
         return name;
     }
@@ -65,16 +73,18 @@ public class Drink {
     private int capacity;
     private String color;
     private String type;
+    private int price;
     private String company;
     @OneToMany
     private List<Ingredient> ingredientList;
 
-    public Drink(Long id, String name, int capacity, String color, String type, String company, List<Ingredient> ingredientList) {
+    public Drink(Long id, String name, int capacity, String color, String type,int price, String company, List<Ingredient> ingredientList) {
         this.id = id;
         this.name = name;
         this.capacity = capacity;
         this.color = color;
         this.type = type;
+        this.price=price;
         this.company = company;
         this.ingredientList = ingredientList;
     }
