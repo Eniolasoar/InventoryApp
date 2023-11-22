@@ -19,8 +19,8 @@ public class DrinkAPIController {
     @Autowired
     DrinkService drinkService;
 
-    @RequestMapping("/drinks");
-    @GetMapping("/drinks");
+    @RequestMapping("/drinks")
+    @GetMapping("/drinks")
     public ResponseEntity<List<Drink>> getAllDrink(){
         return ResponseEntity.ok().body(drinkService.getAllDrinks());
     }
